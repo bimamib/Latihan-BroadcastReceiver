@@ -11,7 +11,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import com.bima.mybroadcastreceiver.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     var requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
+        RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
             Toast.makeText(this, "Sms receiver permission diterima", Toast.LENGTH_SHORT).show()
