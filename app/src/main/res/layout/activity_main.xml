@@ -12,10 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/this_sms_receiver_app"
+        android:fontFamily="@font/poppins_regular"
         android:layout_marginBottom="16dp" />
     <Button
         android:id="@+id/btn_permission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
         android:text="@string/check_sms_permission" />
 </LinearLayout>
