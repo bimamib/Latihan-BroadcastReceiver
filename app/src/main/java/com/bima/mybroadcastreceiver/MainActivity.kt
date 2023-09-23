@@ -5,10 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import android.Manifest
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bima.mybroadcastreceiver.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    companion object {
+        const val ACTION_DOWNLOAD_STATUS = "download_status"
+    }
 
     private var binding: ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +42,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.btn_permission -> requestPermissionLauncher.launch(Manifest.permission.RECEIVE_SMS)
             R.id.btn_download -> {
-
+                //simulate download process in 3 seconds
+                Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        val notifyFinishIntent = Intent().setAction(ACTION_DOWNLOAD_STATUS)
+                        sendBroadcast(notifyFinishIntent)
+                    },
+                    3000
+                )
             }
         }
     }
