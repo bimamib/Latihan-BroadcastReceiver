@@ -12,6 +12,7 @@ class SmsReceiverActivity : AppCompatActivity() {
     }
 
     private var binding: ActivitySmsReceiverBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
