@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,6 +20,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         const val ACTION_DOWNLOAD_STATUS = "download_status"
     }
 
+    private lateinit var downloadReceiver: BroadcastReceiver
     private var binding: ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             Toast.makeText(this, "Sms receiver permission ditolak", Toast.LENGTH_SHORT).show()
         }
+
+        downloadReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                Toast.makeText(context, "Download Selesai", Toast.LENGTH_SHORT).show()
+            }
+        }
+        val downloadIntentFilter = IntentFilter(ACTION_DOWNLOAD_STATUS)
+        registerReceiver(downloadReceiver, downloadIntentFilter)
     }
 
     override fun onClick(v: View) {
@@ -56,6 +68,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(downloadReceiver)
         binding = null
     }
 }
